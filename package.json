@@ -1,0 +1,38 @@
+{
+  "name": "no-talib",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "tsc": "tsc",
+    "tsc:watch": "tsc -w",
+    "prettier": "node ./node_modules/prettier/bin-prettier.js --parser=typescript --single-quote --trailing-comma=all --write --print-width=120 'src/**/*.ts'",
+    "test": "jest"
+  },
+  "author": "Hao Wang",
+  "license": "MIT",
+  "keywords": [
+    "nodejs",
+    "typescript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/z-hao-wang/no-talib.git"
+  },
+  "peerDependencies": {
+    "lodash": "4.x.x"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "@types/lodash": "^4.14.123",
+    "@types/node": "^11.13.4",
+    "jest": "^24.7.1",
+    "lodash": "^4.17.11",
+    "prettier": "^1.16.4",
+    "talib": "git+https://github.com/z-hao-wang/node-talib.git#cabc7efe62c70285fd22dff90cc76bb4bc4767bc",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.4.3"
+  }
+}
