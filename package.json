@@ -15,7 +15,8 @@
   "license": "MIT",
   "keywords": [
     "nodejs",
-    "typescript"
+    "typescript",
+    "talib"
   ],
   "repository": {
     "type": "git",
