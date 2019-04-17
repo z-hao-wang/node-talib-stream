@@ -9,7 +9,7 @@ export declare class RsiKeeper {
     prevAvgGain: number;
     prevAvgLoss: number;
     constructor(options: {
-        periods: number;
+        period: number;
     });
     add(price: number): void;
     get(): number;

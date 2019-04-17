@@ -7,7 +7,7 @@ describe('rsiKeeper', () => {
   it('should match talib', () => {
     const period = 3;
     const rsiKeeperRes: any = [];
-    const rsiKeeper = new RsiKeeper({ periods: period });
+    const rsiKeeper = new RsiKeeper({ period: period });
     _.each(sampleCandles, c => {
       rsiKeeper.add(c.last);
       rsiKeeperRes.push(rsiKeeper.get());

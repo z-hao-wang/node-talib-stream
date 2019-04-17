@@ -12,10 +12,10 @@ export class RsiKeeper {
   prevAvgGain: number = 0;
   prevAvgLoss: number = 0;
 
-  constructor(options: { periods: number }) {
-    this.period = options.periods;
-    this.prevGain = new SlidingWindowArr({ maxLen: options.periods });
-    this.prevLoss = new SlidingWindowArr({ maxLen: options.periods });
+  constructor(options: { period: number }) {
+    this.period = options.period;
+    this.prevGain = new SlidingWindowArr({ maxLen: options.period });
+    this.prevLoss = new SlidingWindowArr({ maxLen: options.period });
   }
 
   add(price: number) {

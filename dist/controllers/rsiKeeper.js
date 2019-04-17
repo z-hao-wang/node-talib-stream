@@ -11,9 +11,9 @@ class RsiKeeper {
         this.dataLen = 0;
         this.prevAvgGain = 0;
         this.prevAvgLoss = 0;
-        this.period = options.periods;
-        this.prevGain = new slidingWindowArr_1.SlidingWindowArr({ maxLen: options.periods });
-        this.prevLoss = new slidingWindowArr_1.SlidingWindowArr({ maxLen: options.periods });
+        this.period = options.period;
+        this.prevGain = new slidingWindowArr_1.SlidingWindowArr({ maxLen: options.period });
+        this.prevLoss = new slidingWindowArr_1.SlidingWindowArr({ maxLen: options.period });
     }
     add(price) {
         this.dataLen++;
