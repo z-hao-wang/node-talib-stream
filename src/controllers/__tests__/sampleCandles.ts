@@ -197,7 +197,7 @@ export const sampleCandles = [
   { date: '2018-03-18T19:15:00.000Z', first: 7394.6, last: 7510, max: 7545, min: 7383 },
 ];
 
-export const sampleCandles1 =[
+export const sampleCandles2 = [
   {
     date: '2019-03-10T00:00:00.000Z',
     last: 4017.33129524,

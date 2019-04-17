@@ -1,18 +1,16 @@
 import { RsiKeeper } from '../rsiKeeper';
 import * as _ from 'lodash';
 const talib = require('talib');
+import { sampleCandles } from './sampleCandles';
 
-import { sampleCandles } from './sampleCandles'
-
-describe('traderUtils', () => {
-
-  it('getMetric rsiKeeper RSI', () => {
-    const periods = 3;
+describe('rsiKeeper', () => {
+  it('should match talib', () => {
+    const period = 3;
     const rsiKeeperRes: any = [];
-    const rsiKeeper = new RsiKeeper({periods});
-    _.each(sampleCandles, (c) => {
+    const rsiKeeper = new RsiKeeper({ periods: period });
+    _.each(sampleCandles, c => {
       rsiKeeper.add(c.last);
-      rsiKeeperRes.push(rsiKeeper.getRsi());
+      rsiKeeperRes.push(rsiKeeper.get());
     });
 
     // compare talib result
@@ -22,15 +20,13 @@ describe('traderUtils', () => {
       startIdx: 0,
       endIdx: closePrices.length - 1,
       inReal: closePrices,
-      optInTimePeriod: periods,
+      optInTimePeriod: period,
     });
+    console.log(`====talibRes.result.outReal`, talibRes.result.outReal.length);
     // for some reason, talib initial results are calculated differently with our approach
     // but over time, the values are trending to equal
     _.each(talibRes.result.outReal, (t, i: number) => {
-      if (i > 20) {
-        expect(Math.abs(t - rsiKeeperRes[i + periods]) / t < 0.001).toBeTruthy();
-      }
-    })
+      expect(Math.abs(t - rsiKeeperRes[i + period]) < 0.00001).toBeTruthy();
+    });
   });
-
 });

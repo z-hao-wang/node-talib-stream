@@ -1,8 +1,7 @@
 import { SlidingWindowArr } from '../slidingWindowArr';
 
-describe("slidingWindowArr", function() {
-
-  it("should work", function() {
+describe('slidingWindowArr', function() {
+  it('should work', function() {
     const a1 = new SlidingWindowArr({
       maxLen: 2,
     });
@@ -31,5 +30,4 @@ describe("slidingWindowArr", function() {
     expect(a1.first()).toEqual(3);
     expect(a1.last()).toEqual(4);
   });
-
 });
