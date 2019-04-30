@@ -1,4 +1,6 @@
 import { SlidingWindowArr } from './slidingWindowArr';
+import { HLC } from '../types/sharedTypes';
+export declare function getTr(high: number, low: number, prevClose: number): number;
 export declare class AtrKeeper {
     period: number;
     high: SlidingWindowArr;
@@ -8,13 +10,9 @@ export declare class AtrKeeper {
     dataLen: number;
     previousTr: number[];
     constructor(options: {
-        periods: number;
+        period: number;
     });
     protected getTr(): number;
-    add({ high, low, close }: {
-        high: number;
-        low: number;
-        close: number;
-    }): void;
+    add({ high, low, close }: HLC): void;
     get(): number;
 }

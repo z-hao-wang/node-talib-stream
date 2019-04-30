@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && rimraf ./dist/controllers/__tests__",
     "tsc": "tsc",
     "tsc:watch": "tsc -w",
     "prettier": "node ./node_modules/prettier/bin-prettier.js --parser=typescript --single-quote --trailing-comma=all --write --print-width=120 'src/**/*.ts'",
@@ -32,6 +32,7 @@
     "jest": "^24.7.1",
     "lodash": "^4.17.11",
     "prettier": "^1.16.4",
+    "rimraf": "^2.6.3",
     "talib": "git+https://github.com/z-hao-wang/node-talib.git#cabc7efe62c70285fd22dff90cc76bb4bc4767bc",
     "ts-jest": "^24.0.2",
     "typescript": "^3.4.3"
