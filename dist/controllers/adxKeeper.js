@@ -25,18 +25,18 @@ class AdxKeeper {
         const diffP = candle.high - this.lastCandle.high;
         const diffM = this.lastCandle.low - candle.low;
         const addDiff = () => {
-            if ((diffM > 0) && (diffP < diffM)) {
+            if (diffM > 0 && diffP < diffM) {
                 /* Case 2 and 4: +DM=0,-DM=diffM */
                 this.prevMinusDM += diffM;
             }
-            else if ((diffP > 0) && (diffP > diffM)) {
+            else if (diffP > 0 && diffP > diffM) {
                 /* Case 1 and 3: +DM=diffP,-DM=0 */
                 this.prevPlusDM += diffP;
             }
         };
         const calcTr = () => {
             const thisTr = atrKeeper_1.getTr(candle.high, candle.low, this.lastCandle.close);
-            this.prevTR = this.prevTR - (this.prevTR / this.period) + thisTr;
+            this.prevTR = this.prevTR - this.prevTR / this.period + thisTr;
         };
         if (this.dataLen <= this.period) {
             addDiff();
@@ -50,11 +50,11 @@ class AdxKeeper {
             calcTr();
             if (this.prevTR !== 0) {
                 /* Calculate the DX. The value is rounded (see Wilder book). */
-                const minusDI = (100.0 * (this.prevMinusDM / this.prevTR));
-                const plusDI = (100.0 * (this.prevPlusDM / this.prevTR));
+                const minusDI = 100.0 * (this.prevMinusDM / this.prevTR);
+                const plusDI = 100.0 * (this.prevPlusDM / this.prevTR);
                 const sumDi = minusDI + plusDI;
                 if (sumDi !== 0) {
-                    this.sumDX += (100.0 * (Math.abs(minusDI - plusDI) / sumDi));
+                    this.sumDX += 100.0 * (Math.abs(minusDI - plusDI) / sumDi);
                 }
             }
             /* Calculate the first ADX */
@@ -69,11 +69,11 @@ class AdxKeeper {
             calcTr();
             if (this.prevTR !== 0) {
                 /* Calculate the DX. The value is rounded (see Wilder book). */
-                const minusDI = (100.0 * (this.prevMinusDM / this.prevTR));
-                const plusDI = (100.0 * (this.prevPlusDM / this.prevTR));
+                const minusDI = 100.0 * (this.prevMinusDM / this.prevTR);
+                const plusDI = 100.0 * (this.prevPlusDM / this.prevTR);
                 const tempSum = minusDI + plusDI;
                 if (tempSum !== 0) {
-                    const dx = (100.0 * (Math.abs(minusDI - plusDI) / tempSum));
+                    const dx = 100.0 * (Math.abs(minusDI - plusDI) / tempSum);
                     /* Calculate the ADX */
                     this.adx = (this.adx * (this.period - 1) + dx) / this.period;
                 }
