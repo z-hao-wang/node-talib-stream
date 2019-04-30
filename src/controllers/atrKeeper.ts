@@ -1,6 +1,11 @@
 import { SlidingWindowArr } from './slidingWindowArr';
 import * as _ from 'lodash';
 import * as assert from 'assert';
+import { HLC } from '../types/sharedTypes';
+
+export function getTr(high: number, low: number, prevClose: number) {
+  return Math.max(high - low, Math.abs(high - prevClose), Math.abs(low - prevClose));
+}
 
 export class AtrKeeper {
   period: number = 10;
@@ -11,11 +16,11 @@ export class AtrKeeper {
   dataLen: number = 0;
   previousTr: number[] = [];
 
-  constructor(options: { periods: number }) {
-    this.period = options.periods;
-    this.high = new SlidingWindowArr({ maxLen: options.periods });
-    this.low = new SlidingWindowArr({ maxLen: options.periods });
-    this.close = new SlidingWindowArr({ maxLen: options.periods });
+  constructor(options: { period: number }) {
+    this.period = options.period;
+    this.high = new SlidingWindowArr({ maxLen: options.period });
+    this.low = new SlidingWindowArr({ maxLen: options.period });
+    this.close = new SlidingWindowArr({ maxLen: options.period });
     assert(this.period >= 2, 'AtrKeeper period must be >= 2');
   }
 
@@ -32,14 +37,10 @@ export class AtrKeeper {
    * inconsistency.
    */
   protected getTr() {
-    return Math.max(
-      this.high.last()! - this.low.last()!,
-      Math.abs(this.high.last()! - this.close.get(-2)!),
-      Math.abs(this.low.last()! - this.close.get(-2)!),
-    );
+    return getTr(this.high.last()!, this.low.last()!, this.close.get(-2)!);
   }
 
-  add({ high, low, close }: { high: number; low: number; close: number }) {
+  add({ high, low, close }: HLC) {
     this.dataLen++;
     this.high.push(high);
     this.low.push(low);

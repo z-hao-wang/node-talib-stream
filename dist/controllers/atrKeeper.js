@@ -3,16 +3,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const slidingWindowArr_1 = require("./slidingWindowArr");
 const _ = require("lodash");
 const assert = require("assert");
+function getTr(high, low, prevClose) {
+    return Math.max(high - low, Math.abs(high - prevClose), Math.abs(low - prevClose));
+}
+exports.getTr = getTr;
 class AtrKeeper {
     constructor(options) {
         this.period = 10;
         this.atr = 0;
         this.dataLen = 0;
         this.previousTr = [];
-        this.period = options.periods;
-        this.high = new slidingWindowArr_1.SlidingWindowArr({ maxLen: options.periods });
-        this.low = new slidingWindowArr_1.SlidingWindowArr({ maxLen: options.periods });
-        this.close = new slidingWindowArr_1.SlidingWindowArr({ maxLen: options.periods });
+        this.period = options.period;
+        this.high = new slidingWindowArr_1.SlidingWindowArr({ maxLen: options.period });
+        this.low = new slidingWindowArr_1.SlidingWindowArr({ maxLen: options.period });
+        this.close = new slidingWindowArr_1.SlidingWindowArr({ maxLen: options.period });
         assert(this.period >= 2, 'AtrKeeper period must be >= 2');
     }
     /* True Range is the greatest of the following:
@@ -28,7 +32,7 @@ class AtrKeeper {
      * inconsistency.
      */
     getTr() {
-        return Math.max(this.high.last() - this.low.last(), Math.abs(this.high.last() - this.close.get(-2)), Math.abs(this.low.last() - this.close.get(-2)));
+        return getTr(this.high.last(), this.low.last(), this.close.get(-2));
     }
     add({ high, low, close }) {
         this.dataLen++;
