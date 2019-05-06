@@ -6,7 +6,7 @@ import { sampleCandles } from './sampleCandles';
 describe('rsiKeeper', () => {
   it('should match talib', () => {
     const period = 3;
-    const rsiKeeperRes: any = [];
+    const rsiKeeperRes: number[] = [];
     const rsiKeeper = new RsiKeeper({ period: period });
     _.each(sampleCandles, c => {
       rsiKeeper.add(c.last);
@@ -22,7 +22,7 @@ describe('rsiKeeper', () => {
       inReal: closePrices,
       optInTimePeriod: period,
     });
-    console.log(`====talibRes.result.outReal`, talibRes.result.outReal.length);
+
     // for some reason, talib initial results are calculated differently with our approach
     // but over time, the values are trending to equal
     _.each(talibRes.result.outReal, (t, i: number) => {

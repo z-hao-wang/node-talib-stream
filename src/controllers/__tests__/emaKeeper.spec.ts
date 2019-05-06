@@ -20,10 +20,10 @@ describe('emaKeeper', () => {
     const period = 3;
     const close = _.map(sampleCandles, c => c.last);
 
-    const emaKeeperRes: any = [];
+    const emaKeeperRes: number[] = [];
     const emaKeeper = new EmaKeeper({ period: period });
-    _.each(sampleCandles, c => {
-      emaKeeper.add(c.last);
+    _.each(close, c => {
+      emaKeeper.add(c);
       emaKeeperRes.push(emaKeeper.get());
     });
 

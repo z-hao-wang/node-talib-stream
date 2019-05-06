@@ -15,6 +15,8 @@ npm i talib-stream --save
 
 example code
 ```
+import { AtrKeeper } from 'talib-stream';
+
 const atrKeeperRes: any = [];
 const atrKeeper = new AtrKeeper({ periods: period });
 _.each(sampleCandles, c => {

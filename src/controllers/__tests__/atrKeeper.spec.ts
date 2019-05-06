@@ -11,7 +11,7 @@ describe('atrKeeper', () => {
     const close = _.map(sampleCandles, c => c.last);
     const low = _.map(sampleCandles, c => c.min);
 
-    const atrKeeperRes: any = [];
+    const atrKeeperRes: number[] = [];
     const atrKeeper = new AtrKeeper({ period: period });
     _.each(sampleCandles, c => {
       atrKeeper.add({

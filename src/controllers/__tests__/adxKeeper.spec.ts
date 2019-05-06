@@ -11,7 +11,7 @@ describe('adxKeeper', () => {
     const close = _.map(sampleCandles, c => c.last);
     const low = _.map(sampleCandles, c => c.min);
 
-    const adxKeeperRes: any = [];
+    const adxKeeperRes: number[] = [];
     const adxKeeper = new AdxKeeper({ period: period });
     _.each(sampleCandles, c => {
       adxKeeper.add({
