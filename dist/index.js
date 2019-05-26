@@ -7,3 +7,6 @@ __export(require("./controllers/slidingWindowArr"));
 __export(require("./controllers/rsiKeeper"));
 __export(require("./controllers/atrKeeper"));
 __export(require("./controllers/adxKeeper"));
+__export(require("./controllers/macdKeeper"));
+__export(require("./controllers/medianKeeper"));
+__export(require("./controllers/emaKeeper"));

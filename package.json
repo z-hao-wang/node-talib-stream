@@ -1,6 +1,6 @@
 {
   "name": "talib-stream",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -36,5 +36,8 @@
     "talib": "git+https://github.com/z-hao-wang/node-talib.git#cabc7efe62c70285fd22dff90cc76bb4bc4767bc",
     "ts-jest": "^24.0.2",
     "typescript": "^3.4.3"
+  },
+  "dependencies": {
+    "collections": "^5.1.8"
   }
 }

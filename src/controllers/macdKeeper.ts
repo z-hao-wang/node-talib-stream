@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import { EmaKeeper } from './emaKeeper';
 
 export class MacdKeeper {
