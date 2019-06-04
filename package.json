@@ -1,6 +1,6 @@
 {
   "name": "talib-stream",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -33,7 +33,7 @@
     "lodash": "^4.17.11",
     "prettier": "^1.16.4",
     "rimraf": "^2.6.3",
-    "talib": "git+https://github.com/z-hao-wang/node-talib.git#cabc7efe62c70285fd22dff90cc76bb4bc4767bc",
+    "talib": "git+https://github.com/z-hao-wang/node-talib.git#22bf9d422dbb4c43de4dd629b5f79ed0d7f6302d",
     "ts-jest": "^24.0.2",
     "typescript": "^3.4.3"
   },
