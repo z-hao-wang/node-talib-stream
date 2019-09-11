@@ -1,4 +1,4 @@
-import { SlidingWindowArr } from './slidingWindowArr';
+import { SlidingWindowArr } from 'sliding-window-arr';
 import { HLC } from '../types/sharedTypes';
 export declare function getTr(high: number, low: number, prevClose: number): number;
 export declare class AtrKeeper {

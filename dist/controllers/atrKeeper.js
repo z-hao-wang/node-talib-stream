@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const slidingWindowArr_1 = require("./slidingWindowArr");
+const sliding_window_arr_1 = require("sliding-window-arr");
 const _ = require("lodash");
 const assert = require("assert");
 function getTr(high, low, prevClose) {
@@ -14,9 +14,9 @@ class AtrKeeper {
         this.dataLen = 0;
         this.previousTr = [];
         this.period = options.period;
-        this.high = new slidingWindowArr_1.SlidingWindowArr({ maxLen: options.period });
-        this.low = new slidingWindowArr_1.SlidingWindowArr({ maxLen: options.period });
-        this.close = new slidingWindowArr_1.SlidingWindowArr({ maxLen: options.period });
+        this.high = new sliding_window_arr_1.SlidingWindowArr({ maxLen: options.period });
+        this.low = new sliding_window_arr_1.SlidingWindowArr({ maxLen: options.period });
+        this.close = new sliding_window_arr_1.SlidingWindowArr({ maxLen: options.period });
         assert(this.period >= 2, 'AtrKeeper period must be >= 2');
     }
     /* True Range is the greatest of the following:

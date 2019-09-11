@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const slidingWindowArr_1 = require("./slidingWindowArr");
+const sliding_window_arr_1 = require("sliding-window-arr");
 const _ = require("lodash");
 // http://cns.bu.edu/~gsc/CN710/fincast/Technical%20_indicators/Relative%20Strength%20Index%20(RSI).htm
 class RsiKeeper {
@@ -12,8 +12,8 @@ class RsiKeeper {
         this.prevAvgGain = 0;
         this.prevAvgLoss = 0;
         this.period = options.period;
-        this.prevGain = new slidingWindowArr_1.SlidingWindowArr({ maxLen: options.period });
-        this.prevLoss = new slidingWindowArr_1.SlidingWindowArr({ maxLen: options.period });
+        this.prevGain = new sliding_window_arr_1.SlidingWindowArr({ maxLen: options.period });
+        this.prevLoss = new sliding_window_arr_1.SlidingWindowArr({ maxLen: options.period });
     }
     add(price) {
         this.dataLen++;

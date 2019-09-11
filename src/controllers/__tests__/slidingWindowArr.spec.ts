@@ -1,4 +1,4 @@
-import { SlidingWindowArr } from '../slidingWindowArr';
+import { SlidingWindowArr } from 'sliding-window-arr';
 
 describe('slidingWindowArr', function() {
   it('should work', function() {

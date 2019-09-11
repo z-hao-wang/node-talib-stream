@@ -1,11 +1,11 @@
 {
   "name": "talib-stream",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc && rimraf ./dist/controllers/__tests__",
+    "build": "rimraf dist && tsc && rimraf ./dist/controllers/__tests__",
     "tsc": "tsc",
     "tsc:watch": "tsc -w",
     "prettier": "node ./node_modules/prettier/bin-prettier.js --parser=typescript --single-quote --trailing-comma=all --write --print-width=120 'src/**/*.ts'",
@@ -36,6 +36,7 @@
   "dependencies": {
     "collections": "^5.1.8",
     "lodash": "^4.17.15",
+    "sliding-window-arr": "0.0.1",
     "talib": "^1.1.2"
   }
 }

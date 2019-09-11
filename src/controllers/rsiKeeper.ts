@@ -1,4 +1,4 @@
-import { SlidingWindowArr } from './slidingWindowArr';
+import { SlidingWindowArr } from 'sliding-window-arr';
 import * as _ from 'lodash';
 // http://cns.bu.edu/~gsc/CN710/fincast/Technical%20_indicators/Relative%20Strength%20Index%20(RSI).htm
 

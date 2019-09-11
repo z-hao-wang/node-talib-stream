@@ -1,4 +1,4 @@
-import { SlidingWindowArr } from './slidingWindowArr';
+import { SlidingWindowArr } from 'sliding-window-arr';
 export declare class RsiKeeper {
     period: number;
     prevGain: SlidingWindowArr;

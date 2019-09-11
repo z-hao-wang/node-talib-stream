@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const slidingWindowArr_1 = require("./slidingWindowArr");
+const sliding_window_arr_1 = require("sliding-window-arr");
 const Heap = require('collections/heap');
 class MedianKeeper {
     constructor(props) {
         this.maxHeap = new Heap();
         this.minHeap = new Heap([], null, (a, b) => b - a);
         this.maxLen = props.period;
-        this.valuesArr = new slidingWindowArr_1.SlidingWindowArr({ maxLen: this.maxLen });
+        this.valuesArr = new sliding_window_arr_1.SlidingWindowArr({ maxLen: this.maxLen });
     }
     add(value) {
         let success = true;

@@ -1,4 +1,4 @@
-import { SlidingWindowArr } from './slidingWindowArr';
+import { SlidingWindowArr } from 'sliding-window-arr';
 import * as _ from 'lodash';
 import * as assert from 'assert';
 import { HLC } from '../types/sharedTypes';

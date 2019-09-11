@@ -1,4 +1,4 @@
-import { SlidingWindowArr } from './slidingWindowArr';
+import { SlidingWindowArr } from 'sliding-window-arr';
 const Heap = require('collections/heap');
 
 export class MedianKeeper {
