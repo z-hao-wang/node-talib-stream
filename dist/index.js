@@ -9,3 +9,4 @@ __export(require("./controllers/adxKeeper"));
 __export(require("./controllers/macdKeeper"));
 __export(require("./controllers/medianKeeper"));
 __export(require("./controllers/emaKeeper"));
+__export(require("./controllers/smaKeeper"));

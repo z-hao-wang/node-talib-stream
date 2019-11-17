@@ -10,17 +10,18 @@ class EmaKeeper {
     constructor(options) {
         this.dataLen = 0;
         this.ema = 0;
-        this.prevValues = [];
+        // only used for length not reached period
+        this.historyValues = [];
         this.period = options.period;
     }
     add(price) {
         this.dataLen++;
         if (this.dataLen < this.period) {
-            this.prevValues.push(price);
+            this.historyValues.push(price);
         }
         else if (this.dataLen === this.period) {
-            this.prevValues.push(price);
-            this.ema = _.sum(this.prevValues) / this.prevValues.length;
+            this.historyValues.push(price);
+            this.ema = _.sum(this.historyValues) / this.historyValues.length;
         }
         else {
             this.ema = getEma(this.period, price, this.ema);

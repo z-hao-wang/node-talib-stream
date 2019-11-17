@@ -6,10 +6,11 @@ export function getEma(periods: number, price: number, prevEMA = price) {
 import * as _ from 'lodash';
 
 export class EmaKeeper {
-  period: number;
-  dataLen = 0;
-  ema: number = 0;
-  prevValues: number[] = [];
+  protected period: number;
+  protected dataLen = 0;
+  protected ema: number = 0;
+  // only used for length not reached period
+  protected historyValues: number[] = [];
 
   constructor(options: { period: number }) {
     this.period = options.period;
@@ -18,10 +19,10 @@ export class EmaKeeper {
   add(price: number) {
     this.dataLen++;
     if (this.dataLen < this.period) {
-      this.prevValues.push(price);
+      this.historyValues.push(price);
     } else if (this.dataLen === this.period) {
-      this.prevValues.push(price);
-      this.ema = _.sum(this.prevValues) / this.prevValues.length;
+      this.historyValues.push(price);
+      this.ema = _.sum(this.historyValues) / this.historyValues.length;
     } else {
       this.ema = getEma(this.period, price, this.ema);
     }
