@@ -1,5 +1,5 @@
 import { SlidingWindowArr } from 'sliding-window-arr';
-import * as _ from 'lodash';
+import { sum } from '../utils/common';
 import * as assert from 'assert';
 import { HLC } from '../types/sharedTypes';
 
@@ -51,7 +51,7 @@ export class AtrKeeper {
       }
     } else if (this.dataLen === this.period + 1) {
       // get 1st atr by simple moving average
-      this.atr = _.sum(this.previousTr) / this.previousTr.length;
+      this.atr = sum(this.previousTr) / this.previousTr.length;
       this.atr = (this.atr * (this.period - 1) + this.getTr()) / this.period;
     } else {
       /* Subsequent value are smoothed using the

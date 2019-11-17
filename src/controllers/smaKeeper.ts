@@ -1,5 +1,5 @@
-import * as _ from 'lodash';
 import { SlidingWindowArr } from 'sliding-window-arr';
+import { sum } from '../utils/common';
 
 export namespace SmaKeeper {
   export interface Options {
@@ -28,7 +28,7 @@ export class SmaKeeper {
       } else {
         // the length hasn't reached max, we can just add to new sma
         this.historyValues.push(val);
-        this.currentSma = _.sum(this.historyValues.toUnorderedArr()) / this.historyValues.length();
+        this.currentSma = sum(this.historyValues.toUnorderedArr()) / this.historyValues.length();
       }
     }
   }

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const sliding_window_arr_1 = require("sliding-window-arr");
-const _ = require("lodash");
+const common_1 = require("../utils/common");
 const assert = require("assert");
 function getTr(high, low, prevClose) {
     return Math.max(high - low, Math.abs(high - prevClose), Math.abs(low - prevClose));
@@ -46,7 +46,7 @@ class AtrKeeper {
         }
         else if (this.dataLen === this.period + 1) {
             // get 1st atr by simple moving average
-            this.atr = _.sum(this.previousTr) / this.previousTr.length;
+            this.atr = common_1.sum(this.previousTr) / this.previousTr.length;
             this.atr = (this.atr * (this.period - 1) + this.getTr()) / this.period;
         }
         else {

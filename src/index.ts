@@ -5,3 +5,4 @@ export * from './controllers/macdKeeper';
 export * from './controllers/medianKeeper';
 export * from './controllers/emaKeeper';
 export * from './controllers/smaKeeper';
+export * from './controllers/maxMinKeeper';
