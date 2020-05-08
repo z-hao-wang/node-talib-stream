@@ -26,6 +26,7 @@ class SmaKeeper {
                 this.currentSma = common_1.sum(this.historyValues.toUnorderedArr()) / this.historyValues.length();
             }
         }
+        return this.currentSma;
     }
     getValues() {
         return this.historyValues;

@@ -9,7 +9,7 @@ export declare class SmaKeeper {
     private historyValues;
     private currentSma;
     constructor(options: SmaKeeper.Options);
-    add(val: number): void;
+    add(val: number): number;
     getValues(): SlidingWindowArr<number>;
     get(): number;
     length(): number;

@@ -31,6 +31,7 @@ export class SmaKeeper {
         this.currentSma = sum(this.historyValues.toUnorderedArr()) / this.historyValues.length();
       }
     }
+    return this.currentSma;
   }
 
   getValues() {

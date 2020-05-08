@@ -7,6 +7,6 @@ export declare class EmaKeeper {
     constructor(options: {
         period: number;
     });
-    add(price: number): void;
+    add(price: number): number;
     get(): number;
 }

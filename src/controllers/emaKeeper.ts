@@ -26,6 +26,7 @@ export class EmaKeeper {
     } else {
       this.ema = getEma(this.period, price, this.ema);
     }
+    return this.ema;
   }
 
   get() {
