@@ -29,6 +29,10 @@ export class EmaKeeper {
     return this.ema;
   }
 
+  peekNext(price: number) {
+    return getEma(this.period, price, this.ema);
+  }
+
   get() {
     return this.ema;
   }

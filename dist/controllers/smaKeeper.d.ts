@@ -10,6 +10,7 @@ export declare class SmaKeeper {
     private currentSma;
     constructor(options: SmaKeeper.Options);
     add(val: number): number;
+    peekNext(val: number): number;
     getValues(): SlidingWindowArr<number>;
     get(): number;
     length(): number;

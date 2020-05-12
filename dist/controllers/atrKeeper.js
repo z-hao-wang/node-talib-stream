@@ -59,6 +59,9 @@ class AtrKeeper {
             this.atr = (this.atr * (this.period - 1) + this.getTr()) / this.period;
         }
     }
+    peekNext({ high, low }) {
+        return (this.atr * (this.period - 1) + getTr(high, low, this.close.last())) / this.period;
+    }
     get() {
         return this.atr;
     }

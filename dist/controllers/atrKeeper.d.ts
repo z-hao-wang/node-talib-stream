@@ -14,5 +14,6 @@ export declare class AtrKeeper {
     });
     protected getTr(): number;
     add({ high, low, close }: HLC): void;
+    peekNext({ high, low }: HLC): number;
     get(): number;
 }

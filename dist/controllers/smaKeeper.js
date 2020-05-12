@@ -28,6 +28,23 @@ class SmaKeeper {
         }
         return this.currentSma;
     }
+    peekNext(val) {
+        if (this.historyValues.length() === 0) {
+            return val;
+        }
+        else {
+            if (this.historyValues.length() >= this.period) {
+                let tmpSma = this.currentSma;
+                tmpSma -= this.historyValues.get(0) / this.period;
+                tmpSma += val / this.period;
+                return tmpSma;
+            }
+            else {
+                // the length hasn't reached max
+                return val;
+            }
+        }
+    }
     getValues() {
         return this.historyValues;
     }

@@ -64,6 +64,10 @@ export class AtrKeeper {
     }
   }
 
+  peekNext({ high, low }: HLC) {
+    return (this.atr * (this.period - 1) + getTr(high, low, this.close.last()!)) / this.period;
+  }
+
   get() {
     return this.atr;
   }

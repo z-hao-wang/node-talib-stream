@@ -8,5 +8,6 @@ export declare class EmaKeeper {
         period: number;
     });
     add(price: number): number;
+    peekNext(price: number): number;
     get(): number;
 }
