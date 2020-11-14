@@ -4,3 +4,7 @@ function sum(arr) {
     return arr.reduce((a, b) => a + b, 0);
 }
 exports.sum = sum;
+function squareSum(arr) {
+    return arr.reduce((acc, v) => acc + v * v, 0);
+}
+exports.squareSum = squareSum;
