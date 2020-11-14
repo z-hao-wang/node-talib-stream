@@ -1,9 +1,9 @@
+import { sum } from '../utils/common';
+
 export function getEma(periods: number, price: number, prevEMA = price) {
   const k = 2 / (periods + 1);
   return price * k + prevEMA * (1 - k);
 }
-
-import * as _ from 'lodash';
 
 export class EmaKeeper {
   protected period: number;
@@ -22,7 +22,7 @@ export class EmaKeeper {
       this.historyValues.push(price);
     } else if (this.dataLen === this.period) {
       this.historyValues.push(price);
-      this.ema = _.sum(this.historyValues) / this.historyValues.length;
+      this.ema = sum(this.historyValues) / this.historyValues.length;
     } else {
       this.ema = getEma(this.period, price, this.ema);
     }

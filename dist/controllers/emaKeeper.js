@@ -5,7 +5,7 @@ function getEma(periods, price, prevEMA = price) {
     return price * k + prevEMA * (1 - k);
 }
 exports.getEma = getEma;
-const _ = require("lodash");
+const common_1 = require("../utils/common");
 class EmaKeeper {
     constructor(options) {
         this.dataLen = 0;
@@ -21,7 +21,7 @@ class EmaKeeper {
         }
         else if (this.dataLen === this.period) {
             this.historyValues.push(price);
-            this.ema = _.sum(this.historyValues) / this.historyValues.length;
+            this.ema = common_1.sum(this.historyValues) / this.historyValues.length;
         }
         else {
             this.ema = getEma(this.period, price, this.ema);
