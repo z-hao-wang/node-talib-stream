@@ -11,3 +11,5 @@ __export(require("./controllers/medianKeeper"));
 __export(require("./controllers/emaKeeper"));
 __export(require("./controllers/smaKeeper"));
 __export(require("./controllers/maxMinKeeper"));
+__export(require("./controllers/stdKeeper"));
+__export(require("./controllers/candleKeeper"));

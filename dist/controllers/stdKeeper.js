@@ -45,8 +45,8 @@ class StdKeeper {
                 this.s1 = common_1.sum(this.historyValues.toUnorderedArr());
                 this.s2 = common_1.squareSum(this.historyValues.toUnorderedArr());
                 const u = this.s1 / this.count;
-                const sigmaSquare = this.s2 / this.count - (u * u);
-                const sigmaUnbiased = this.count / (this.count - 1) * sigmaSquare;
+                const sigmaSquare = this.s2 / this.count - u * u;
+                const sigmaUnbiased = (this.count / (this.count - 1)) * sigmaSquare;
                 this.std = Math.sqrt(sigmaUnbiased);
             }
         }
@@ -54,8 +54,8 @@ class StdKeeper {
             this.s1 += val;
             this.s2 += val * val;
             const u = this.s1 / this.count;
-            const sigmaSquare = this.s2 / this.count - (u * u);
-            const sigmaUnbiased = this.count / (this.count - 1) * sigmaSquare;
+            const sigmaSquare = this.s2 / this.count - u * u;
+            const sigmaUnbiased = (this.count / (this.count - 1)) * sigmaSquare;
             this.std = Math.sqrt(sigmaUnbiased);
         }
     }

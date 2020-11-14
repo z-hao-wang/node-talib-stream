@@ -6,3 +6,5 @@ export * from './controllers/medianKeeper';
 export * from './controllers/emaKeeper';
 export * from './controllers/smaKeeper';
 export * from './controllers/maxMinKeeper';
+export * from './controllers/stdKeeper';
+export * from './controllers/candleKeeper';
