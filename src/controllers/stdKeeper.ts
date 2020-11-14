@@ -62,8 +62,8 @@ export class StdKeeper {
       this.squareSum += val * val;
       this.squareSum -= valueRemoved * valueRemoved;
       // const middleValSum = sum(this.historyValues.map(v => v * sma * 2));
-      const middleValSum = sma * 2 * sma * this.period;
-      const stdSquare = this.squareSum / this.period - middleValSum / this.period + sma * sma;
+      const middleValSum = sma * 2 * sma;
+      const stdSquare = this.squareSum / this.period - middleValSum + sma * sma;
       this.std = Math.sqrt(stdSquare);
     } else {
       this.historyValues.push(val);
