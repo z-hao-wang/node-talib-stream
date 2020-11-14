@@ -2,14 +2,16 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const sliding_window_arr_1 = require("sliding-window-arr");
 const common_1 = require("../utils/common");
+const smaKeeper_1 = require("./smaKeeper");
 class StdKeeper {
     constructor(options) {
         this.std = 0;
         this.s1 = 0;
         this.s2 = 0;
-        this.count = 0;
+        this.squareSum = 0;
         this.period = options.period;
         this.historyValues = new sliding_window_arr_1.SlidingWindowArr({ maxLen: this.period });
+        this.smaKeeper = new smaKeeper_1.SmaKeeper({ period: this.period });
     }
     static average(values) {
         return common_1.sum(values) / values.length;
@@ -38,25 +40,25 @@ class StdKeeper {
         return Math.sqrt(avgSquareDiff);
     }
     add(val) {
-        this.count++;
-        if (this.historyValues.length() < this.period) {
+        // u = sma
+        // (x^2 - 2 * x * u + u^2) / len
+        if (this.historyValues.length() >= this.period) {
+            const valueRemoved = this.historyValues.first();
             this.historyValues.push(val);
-            if (this.historyValues.length() === this.period) {
-                this.s1 = common_1.sum(this.historyValues.toUnorderedArr());
-                this.s2 = common_1.squareSum(this.historyValues.toUnorderedArr());
-                const u = this.s1 / this.count;
-                const sigmaSquare = this.s2 / this.count - u * u;
-                const sigmaUnbiased = (this.count / (this.count - 1)) * sigmaSquare;
-                this.std = Math.sqrt(sigmaUnbiased);
-            }
+            this.smaKeeper.add(val);
+            const sma = this.smaKeeper.get();
+            this.squareSum += val * val;
+            this.squareSum -= valueRemoved * valueRemoved;
+            // const middleValSum = sum(this.historyValues.map(v => v * sma * 2));
+            const middleValSum = sma * 2 * sma * this.period;
+            const stdSquare = this.squareSum / this.period - middleValSum / this.period + sma * sma;
+            this.std = Math.sqrt(stdSquare);
         }
         else {
-            this.s1 += val;
-            this.s2 += val * val;
-            const u = this.s1 / this.count;
-            const sigmaSquare = this.s2 / this.count - u * u;
-            const sigmaUnbiased = (this.count / (this.count - 1)) * sigmaSquare;
-            this.std = Math.sqrt(sigmaUnbiased);
+            this.historyValues.push(val);
+            this.smaKeeper.add(val);
+            this.squareSum += val * val;
+            this.std = StdKeeper.standardDeviation(this.historyValues.toUnorderedArr());
         }
     }
     get() {

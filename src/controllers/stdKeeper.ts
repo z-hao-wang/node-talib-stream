@@ -1,5 +1,6 @@
 import { SlidingWindowArr } from 'sliding-window-arr';
 import { sum, squareSum } from '../utils/common';
+import { SmaKeeper } from './smaKeeper';
 
 // https://math.stackexchange.com/questions/595541/rolling-standard-deviations
 export namespace StdKeeper {
@@ -12,12 +13,14 @@ export class StdKeeper {
   private std: number = 0;
   private s1 = 0;
   private s2 = 0;
-  private count = 0;
+  private squareSum = 0;
   private historyValues: SlidingWindowArr;
+  private smaKeeper: SmaKeeper;
 
   constructor(options: StdKeeper.Options) {
     this.period = options.period;
     this.historyValues = new SlidingWindowArr<number>({ maxLen: this.period });
+    this.smaKeeper = new SmaKeeper({ period: this.period });
   }
 
   static average(values: number[]) {
@@ -49,24 +52,24 @@ export class StdKeeper {
   }
 
   add(val: number) {
-    this.count++;
-    if (this.historyValues.length() < this.period) {
+    // u = sma
+    // (x^2 - 2 * x * u + u^2) / len
+    if (this.historyValues.length() >= this.period) {
+      const valueRemoved = this.historyValues.first()!;
       this.historyValues.push(val);
-      if (this.historyValues.length() === this.period) {
-        this.s1 = sum(this.historyValues.toUnorderedArr());
-        this.s2 = squareSum(this.historyValues.toUnorderedArr());
-        const u = this.s1 / this.count;
-        const sigmaSquare = this.s2 / this.count - u * u;
-        const sigmaUnbiased = (this.count / (this.count - 1)) * sigmaSquare;
-        this.std = Math.sqrt(sigmaUnbiased);
-      }
+      this.smaKeeper.add(val);
+      const sma = this.smaKeeper.get();
+      this.squareSum += val * val;
+      this.squareSum -= valueRemoved * valueRemoved;
+      // const middleValSum = sum(this.historyValues.map(v => v * sma * 2));
+      const middleValSum = sma * 2 * sma * this.period;
+      const stdSquare = this.squareSum / this.period - middleValSum / this.period + sma * sma;
+      this.std = Math.sqrt(stdSquare);
     } else {
-      this.s1 += val;
-      this.s2 += val * val;
-      const u = this.s1 / this.count;
-      const sigmaSquare = this.s2 / this.count - u * u;
-      const sigmaUnbiased = (this.count / (this.count - 1)) * sigmaSquare;
-      this.std = Math.sqrt(sigmaUnbiased);
+      this.historyValues.push(val);
+      this.smaKeeper.add(val);
+      this.squareSum += val * val;
+      this.std = StdKeeper.standardDeviation(this.historyValues.toUnorderedArr());
     }
   }
 

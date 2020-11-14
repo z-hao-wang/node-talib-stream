@@ -13,10 +13,14 @@ describe('StdKeeper', () => {
         stdKeeper.add(90);
         const normalStd = stdKeeper_1.StdKeeper.standardDeviation([32, 47, 42, 45, 80, 90]);
         expect(normalStd).toEqual(21.236760581595302);
-        expect(stdKeeper.get()).toEqual(23.263705637752555);
+        expect(stdKeeper.get()).toEqual(21.236760581595302);
         stdKeeper.add(52);
         const normalStd2 = stdKeeper_1.StdKeeper.standardDeviation([47, 42, 45, 80, 90, 52]);
         expect(normalStd2).toEqual(18.61600267392427);
-        expect(stdKeeper.get()).toEqual(21.290507609864864);
+        expect(stdKeeper.get()).toEqual(18.6160026739242857);
+        stdKeeper.add(159);
+        const normalStd3 = stdKeeper_1.StdKeeper.standardDeviation([42, 45, 80, 90, 52, 159]);
+        expect(normalStd3).toEqual(40.352612472222084);
+        expect(stdKeeper.get()).toEqual(40.352612472222084);
     });
 });

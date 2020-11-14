@@ -8,8 +8,9 @@ export declare class StdKeeper {
     private std;
     private s1;
     private s2;
-    private count;
+    private squareSum;
     private historyValues;
+    private smaKeeper;
     constructor(options: StdKeeper.Options);
     static average(values: number[]): number;
     static standardDeviation(values: number[], limit?: number): number;
