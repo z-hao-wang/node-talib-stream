@@ -37,7 +37,7 @@
     "typescript": "^3.7.4"
   },
   "dependencies": {
-    "collections": "^5.1.8",
+    "collections": "^5.1.12",
     "sliding-window-arr": "^0.1.1"
   }
 }
