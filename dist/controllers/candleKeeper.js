@@ -12,6 +12,7 @@ class CandleKeeper {
             throw new Error(`shiftMs must be < 0`);
         }
         this.shiftMs = options.shiftMs || 0;
+        this.onNewCandle = options.onNewCandle;
     }
     // snap timestamp to resolution.
     // e.g. 10:01:00 should snap tp 10:00:00 for 14400 resolution
@@ -48,6 +49,7 @@ class CandleKeeper {
                 first: this.first,
                 last: this.last,
             };
+            this.onNewCandle && this.onNewCandle(this.lastCandle);
             this.first = 0;
         }
         if (!this.first) {

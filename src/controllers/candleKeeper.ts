@@ -2,8 +2,17 @@ export namespace CandleKeeper {
   export interface Options {
     period: number;
     shiftMs?: number;
+    onNewCandle?: (candle: CandleKeeper.Candle) => any;
+  }
+  export interface Candle {
+    ts: number;
+    max: number;
+    min: number;
+    first: number;
+    last: number;
   }
 }
+
 export class CandleKeeper {
   private period: number;
   private max = 0;
@@ -11,7 +20,8 @@ export class CandleKeeper {
   private last = 0;
   private first = 0;
   private shiftMs = 0;
-  private lastCandle?: { ts: number; max: number; min: number; first: number; last: number };
+  private lastCandle?: CandleKeeper.Candle;
+  private onNewCandle?: (candle: CandleKeeper.Candle) => any;
 
   constructor(options: CandleKeeper.Options) {
     this.period = options.period;
@@ -19,6 +29,7 @@ export class CandleKeeper {
       throw new Error(`shiftMs must be < 0`);
     }
     this.shiftMs = options.shiftMs || 0;
+    this.onNewCandle = options.onNewCandle;
   }
 
   // snap timestamp to resolution.
@@ -55,6 +66,7 @@ export class CandleKeeper {
         first: this.first,
         last: this.last,
       };
+      this.onNewCandle && this.onNewCandle(this.lastCandle);
       this.first = 0;
     }
 
