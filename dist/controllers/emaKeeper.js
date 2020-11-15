@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const common_1 = require("../utils/common");
 function getEma(periods, price, prevEMA = price) {
     const k = 2 / (periods + 1);
     return price * k + prevEMA * (1 - k);
 }
 exports.getEma = getEma;
-const common_1 = require("../utils/common");
 class EmaKeeper {
     constructor(options) {
         this.dataLen = 0;

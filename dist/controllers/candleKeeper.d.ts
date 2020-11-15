@@ -1,6 +1,7 @@
 export declare namespace CandleKeeper {
     interface Options {
         period: number;
+        shiftMs?: number;
     }
 }
 export declare class CandleKeeper {
@@ -9,9 +10,10 @@ export declare class CandleKeeper {
     private min;
     private last;
     private first;
+    private shiftMs;
     private lastCandle?;
     constructor(options: CandleKeeper.Options);
-    static snapTimestamp(ts: number, resolution: number): number;
+    static snapTimestamp(ts: number, resolution: number, shiftMs?: number): number;
     add(ts: number, price: number): void;
     get(): {
         ts: number;
