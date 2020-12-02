@@ -74,7 +74,6 @@ class CandleKeeper {
             this.onNewCandle && this.onNewCandle(this.lastCandle);
             this.first = 0;
         }
-        console.log(`this.first`, this.first, this.buy_volume);
         // new candle, reset all data
         if (!this.first) {
             this.first = price;
