@@ -126,7 +126,35 @@ export class CandleKeeper {
   }
 
   get() {
+    if (!this.lastCandle) {
+      console.error(`CandleKeeper no last candle`);
+      return {
+        ts: 0,
+        max: 0,
+        min: 0,
+        first: 0,
+        last: 0,
+      };
+    }
     return this.lastCandle;
+  }
+
+  getTempCandle(ts: number) {
+    const shiftMs = this.shiftMs;
+    const tmpCandle: CandleKeeper.Candle = {
+      ts: CandleKeeper.snapTimestamp(ts, this.period, shiftMs),
+      max: this.max,
+      min: this.min,
+      first: this.first,
+      last: this.last,
+    };
+    if (this.includesVolume) {
+      tmpCandle.buy_volume = this.buy_volume;
+      tmpCandle.sell_volume = this.sell_volume;
+      tmpCandle.buy_cost = this.buy_cost;
+      tmpCandle.sell_cost = this.sell_cost;
+    }
+    return tmpCandle;
   }
 
   getPeriod() {
