@@ -70,4 +70,39 @@ describe('CandleKeeper', () => {
 
     expect(candleKeeper.get()).toEqual({ ts: 9595000, max: 1952, min: 1251, first: 1253, last: 1952 });
   });
+
+  it('should work with volume and cost', () => {
+    const candleKeeper = new CandleKeeper({ period: 300, includesVolume: true });
+    candleKeeper.add(1000, 1250, 0, 30.5);
+    expect(candleKeeper.get()).toEqual({
+      ts: 0,
+      max: 1250,
+      min: 1250,
+      first: 1250,
+      last: 1250,
+      buy_cost: 0,
+      sell_cost: 0,
+      buy_volume: 0,
+      sell_volume: 0,
+    });
+
+    candleKeeper.add(1100, 1251, 0, 21);
+    candleKeeper.add(1101, 1249, 1, 22);
+    candleKeeper.add(1103, 1252, 0, 12);
+    candleKeeper.add(1103, 1253, 1, 88);
+
+    candleKeeper.add(300103, 1253, 0, 10);
+
+    expect(candleKeeper.get()).toEqual({
+      ts: 300000,
+      max: 1253,
+      min: 1249,
+      first: 1250,
+      last: 1253,
+      buy_volume: 21 + 12 + 30.5,
+      sell_volume: 22 + 88,
+      buy_cost: 79420,
+      sell_cost: 22 * 1249 + 88 * 1253,
+    });
+  });
 });
