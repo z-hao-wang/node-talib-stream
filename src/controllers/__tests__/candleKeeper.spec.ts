@@ -57,7 +57,7 @@ describe('CandleKeeper', () => {
     candleKeeper.add(1103, 1253);
 
     candleKeeper.add(1000103, 1257);
-    expect(onNewCandle).toHaveBeenCalledTimes(4);
+    expect(onNewCandle).toHaveBeenCalledTimes(3);
     expect(candleKeeper.get()).toEqual({
       ts: 900000,
       max: 1253,

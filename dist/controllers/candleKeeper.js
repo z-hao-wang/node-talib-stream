@@ -60,7 +60,7 @@ class CandleKeeper {
             if (ts - this.lastCandle.ts >= 2 * this.period * 1000) {
                 // maybe there are some gap in these trades, backfill empty candles.
                 let currentTmpCandleTs = this.lastCandle.ts + this.period * 1000;
-                while (currentTmpCandleTs < ts) {
+                while (currentTmpCandleTs < ts - this.period * 1000) {
                     const lastCandlePrice = this.last;
                     this.lastCandle = {
                         ts: CandleKeeper.snapTimestamp(currentTmpCandleTs, this.period, shiftMs),
@@ -69,6 +69,12 @@ class CandleKeeper {
                         first: lastCandlePrice,
                         last: lastCandlePrice,
                     };
+                    if (this.includesVolume) {
+                        this.lastCandle.buy_volume = 0;
+                        this.lastCandle.sell_volume = 0;
+                        this.lastCandle.buy_cost = 0;
+                        this.lastCandle.sell_cost = 0;
+                    }
                     this.max = lastCandlePrice;
                     this.min = lastCandlePrice;
                     this.first = lastCandlePrice;
