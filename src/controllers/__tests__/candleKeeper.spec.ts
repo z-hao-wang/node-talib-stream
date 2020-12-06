@@ -39,6 +39,41 @@ describe('CandleKeeper', () => {
     });
   });
 
+  it('should work with backfill empty candles', () => {
+    const onNewCandle = jest.fn();
+    const candleKeeper = new CandleKeeper({ period: 300, onNewCandle });
+    candleKeeper.add(1000, 1250);
+    expect(candleKeeper.get()).toEqual({
+      ts: 0,
+      max: 1250,
+      min: 1250,
+      first: 1250,
+      last: 1250,
+    });
+
+    candleKeeper.add(1100, 1251);
+    candleKeeper.add(1101, 1249);
+    candleKeeper.add(1103, 1252);
+    candleKeeper.add(1103, 1253);
+
+    candleKeeper.add(1000103, 1257);
+    expect(onNewCandle).toHaveBeenCalledTimes(4);
+    expect(candleKeeper.get()).toEqual({
+      ts: 900000,
+      max: 1253,
+      min: 1253,
+      first: 1253,
+      last: 1253,
+    });
+    expect(candleKeeper.getTempCandle(1000105)).toEqual({
+      ts: 900000,
+      max: 1257,
+      min: 1257,
+      first: 1257,
+      last: 1257,
+    });
+  });
+
   it('should work with shiftMs', () => {
     const candleKeeper = new CandleKeeper({ period: 300, shiftMs: -5000 });
     candleKeeper.add(8993000, 1250);
