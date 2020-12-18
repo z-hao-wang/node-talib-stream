@@ -43,6 +43,10 @@ export class CandleKeeper {
     this.includesVolume = options.includesVolume || false;
   }
 
+  setOnNewCandle(onNewCandle: CandleKeeper.Options['onNewCandle']) {
+    this.onNewCandle = onNewCandle;
+  }
+
   // snap timestamp to resolution.
   // e.g. 10:01:00 should snap tp 10:00:00 for 14400 resolution
   // special if it is already the exact time, it will return the same time back.
