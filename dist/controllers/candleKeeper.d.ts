@@ -4,6 +4,8 @@ export declare namespace CandleKeeper {
         shiftMs?: number;
         includesVolume?: boolean;
         onNewCandle?: (candle: CandleKeeper.Candle) => any;
+        exchange?: string;
+        symbol?: string;
     }
     interface Candle {
         ts: number;
@@ -31,6 +33,8 @@ export declare class CandleKeeper {
     private lastCandle?;
     private onNewCandle?;
     private includesVolume;
+    exchange?: string;
+    symbol?: string;
     constructor(options: CandleKeeper.Options);
     setOnNewCandle(onNewCandle: CandleKeeper.Options['onNewCandle']): void;
     static snapTimestamp(ts: number, resolution: number, shiftMs?: number): number;

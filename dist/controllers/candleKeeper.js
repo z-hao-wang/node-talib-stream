@@ -19,6 +19,8 @@ class CandleKeeper {
         this.shiftMs = options.shiftMs || 0;
         this.onNewCandle = options.onNewCandle;
         this.includesVolume = options.includesVolume || false;
+        this.exchange = options.exchange;
+        this.symbol = options.symbol;
     }
     setOnNewCandle(onNewCandle) {
         this.onNewCandle = onNewCandle;

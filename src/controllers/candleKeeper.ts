@@ -4,6 +4,8 @@ export namespace CandleKeeper {
     shiftMs?: number;
     includesVolume?: boolean;
     onNewCandle?: (candle: CandleKeeper.Candle) => any;
+    exchange?: string;
+    symbol?: string;
   }
   export interface Candle {
     ts: number;
@@ -33,6 +35,9 @@ export class CandleKeeper {
   private onNewCandle?: (candle: CandleKeeper.Candle) => any;
   private includesVolume = false;
 
+  exchange?: string;
+  symbol?: string;
+
   constructor(options: CandleKeeper.Options) {
     this.period = options.period;
     if (options.shiftMs && options.shiftMs > 0) {
@@ -41,6 +46,9 @@ export class CandleKeeper {
     this.shiftMs = options.shiftMs || 0;
     this.onNewCandle = options.onNewCandle;
     this.includesVolume = options.includesVolume || false;
+
+    this.exchange = options.exchange;
+    this.symbol = options.symbol;
   }
 
   setOnNewCandle(onNewCandle: CandleKeeper.Options['onNewCandle']) {
