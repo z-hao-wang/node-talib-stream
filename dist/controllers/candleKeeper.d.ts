@@ -32,7 +32,7 @@ export declare class CandleKeeper {
     private onNewCandle?;
     private includesVolume;
     constructor(options: CandleKeeper.Options);
-    setOnNewCandle(onNewCandle: CandleKeeper.Options["onNewCandle"]): void;
+    setOnNewCandle(onNewCandle: CandleKeeper.Options['onNewCandle']): void;
     static snapTimestamp(ts: number, resolution: number, shiftMs?: number): number;
     addTrade(tradeV2: number[]): void;
     add(ts: number, price: number, side?: number, amount?: number): void;
