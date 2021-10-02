@@ -48,6 +48,8 @@ class CandleKeeper {
         const shiftMs = this.shiftMs;
         if (!this.lastCandle) {
             this.lastCandle = {
+                exchange: this.exchange,
+                pairDb: this.symbol,
                 ts: CandleKeeper.snapTimestamp(ts, this.period, shiftMs),
                 max: price,
                 min: price,
@@ -68,6 +70,8 @@ class CandleKeeper {
                 while (currentTmpCandleTs < ts - this.period * 1000) {
                     const lastCandlePrice = this.last;
                     this.lastCandle = {
+                        exchange: this.exchange,
+                        pairDb: this.symbol,
                         ts: CandleKeeper.snapTimestamp(currentTmpCandleTs, this.period, shiftMs),
                         max: lastCandlePrice,
                         min: lastCandlePrice,
@@ -90,6 +94,8 @@ class CandleKeeper {
             }
             // generate new candle
             this.lastCandle = {
+                exchange: this.exchange,
+                pairDb: this.symbol,
                 ts: CandleKeeper.snapTimestamp(ts, this.period, shiftMs),
                 max: this.max,
                 min: this.min,
@@ -135,6 +141,8 @@ class CandleKeeper {
         if (!this.lastCandle) {
             console.error(`CandleKeeper no last candle`);
             return {
+                exchange: this.exchange,
+                pairDb: this.symbol,
                 ts: 0,
                 max: 0,
                 min: 0,
@@ -147,6 +155,8 @@ class CandleKeeper {
     getTempCandle(ts) {
         const shiftMs = this.shiftMs;
         const tmpCandle = {
+            exchange: this.exchange,
+            pairDb: this.symbol,
             ts: CandleKeeper.snapTimestamp(ts, this.period, shiftMs),
             max: this.max,
             min: this.min,

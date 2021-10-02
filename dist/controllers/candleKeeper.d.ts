@@ -17,6 +17,8 @@ export declare namespace CandleKeeper {
         sell_volume?: number;
         buy_cost?: number;
         sell_cost?: number;
+        exchange?: string;
+        pairDb?: string;
     }
 }
 export declare class CandleKeeper {
