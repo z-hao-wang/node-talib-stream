@@ -38,3 +38,6 @@ npm run test
 
 ## Build from source
 `npm build` to build the lib
+
+### publish code
+npm publish

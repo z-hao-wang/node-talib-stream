@@ -173,7 +173,7 @@ export class CandleKeeper {
 
   get() {
     if (!this.lastCandle) {
-      console.error(`CandleKeeper no last candle`);
+      console.error(`CandleKeeper no last candle ${this.exchange} ${this.symbol}`);
       return {
         exchange: this.exchange,
         pairDb: this.symbol,
