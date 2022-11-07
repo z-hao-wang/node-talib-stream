@@ -19,6 +19,10 @@ export namespace CandleKeeper {
     sell_cost?: number;
     exchange?: string;
     pairDb?: string;
+    avg?: number;
+    buy_times?: number;
+    sell_times?: number;
+    len?: number;
   }
 }
 
@@ -32,7 +36,10 @@ export class CandleKeeper {
   private sell_volume = 0;
   private buy_cost = 0;
   private sell_cost = 0;
+  private buy_times = 0;
+  private sell_times = 0;
   private shiftMs = 0;
+  private len = 0;
   private lastCandle?: CandleKeeper.Candle;
   private onNewCandle?: (candle: CandleKeeper.Candle) => any;
   private includesVolume = false;
@@ -77,6 +84,16 @@ export class CandleKeeper {
     this.add(ts, r, side, a);
   }
 
+  resetCandle() {
+    if (!this.lastCandle) return;
+    this.lastCandle.buy_volume = 0;
+    this.lastCandle.sell_volume = 0;
+    this.lastCandle.buy_cost = 0;
+    this.lastCandle.sell_cost = 0;
+    this.lastCandle.buy_times = 0;
+    this.lastCandle.sell_times = 0;
+  }
+
   add(ts: number, price: number, side: number = 0, amount: number = 0) {
     const shiftMs = this.shiftMs;
     if (!this.lastCandle) {
@@ -94,6 +111,8 @@ export class CandleKeeper {
         this.lastCandle.sell_volume = this.sell_volume;
         this.lastCandle.buy_cost = this.buy_cost;
         this.lastCandle.sell_cost = this.sell_cost;
+        this.lastCandle.buy_times = this.buy_times;
+        this.lastCandle.sell_times = this.sell_times;
       }
     } else if (ts - this.lastCandle.ts >= this.period * 1000) {
       if (ts - this.lastCandle.ts >= 2 * this.period * 1000) {
@@ -111,16 +130,13 @@ export class CandleKeeper {
             last: lastCandlePrice,
           };
           if (this.includesVolume) {
-            this.lastCandle.buy_volume = 0;
-            this.lastCandle.sell_volume = 0;
-            this.lastCandle.buy_cost = 0;
-            this.lastCandle.sell_cost = 0;
+            this.resetCandle();
           }
           this.max = lastCandlePrice;
           this.min = lastCandlePrice;
           this.first = lastCandlePrice;
           this.last = lastCandlePrice;
-          this.onNewCandle && this.onNewCandle(this.lastCandle);
+          this.onNewCandle && this.onNewCandle(this.get());
           currentTmpCandleTs += this.period * 1000;
         }
       }
@@ -139,8 +155,10 @@ export class CandleKeeper {
         this.lastCandle.sell_volume = this.sell_volume;
         this.lastCandle.buy_cost = this.buy_cost;
         this.lastCandle.sell_cost = this.sell_cost;
+        this.lastCandle.buy_times = this.buy_times;
+        this.lastCandle.sell_times = this.sell_times;
       }
-      this.onNewCandle && this.onNewCandle(this.lastCandle);
+      this.onNewCandle && this.onNewCandle(this.get());
       this.first = 0;
     }
     // new candle, reset all data
@@ -149,10 +167,7 @@ export class CandleKeeper {
       this.max = price;
       this.min = price;
       if (this.includesVolume) {
-        this.buy_volume = 0;
-        this.buy_cost = 0;
-        this.sell_volume = 0;
-        this.sell_cost = 0;
+        this.resetCandle();
       }
     }
 
@@ -164,14 +179,16 @@ export class CandleKeeper {
       if (side === 0) {
         this.buy_volume += amount;
         this.buy_cost += amount * price;
+        this.buy_times++;
       } else {
         this.sell_volume += amount!;
         this.sell_cost += amount * price;
+        this.sell_times++;
       }
     }
   }
 
-  get() {
+  get(): CandleKeeper.Candle {
     if (!this.lastCandle) {
       console.error(`CandleKeeper no last candle ${this.exchange} ${this.symbol}`);
       return {
@@ -182,9 +199,28 @@ export class CandleKeeper {
         min: 0,
         first: 0,
         last: 0,
+        len: 0,
+        buy_times: 0,
+        sell_times: 0,
+        buy_cost: 0,
+        sell_cost: 0,
+        buy_volume: 0,
+        sell_volume: 0,
+        avg: 0,
       };
+    } else {
+      const candle = {
+        ...this.lastCandle,
+      };
+      const len = this.lastCandle!.buy_times! + this.lastCandle!.sell_times!;
+      if (this.includesVolume && len) {
+        candle.avg =
+          (this.lastCandle.buy_cost! + this.lastCandle.sell_cost!) /
+          (this.lastCandle!.buy_volume! + this.lastCandle!.sell_volume!);
+        candle.len = len;
+      }
+      return candle;
     }
-    return this.lastCandle;
   }
 
   getTempCandle(ts: number) {
