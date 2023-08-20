@@ -262,3 +262,6 @@ export const sampleCandles2 = [
     min: 4023.3,
   },
 ];
+export const high = sampleCandles.map(c => c.max);
+export const close = sampleCandles.map(c => c.last);
+export const low = sampleCandles.map(c => c.min);

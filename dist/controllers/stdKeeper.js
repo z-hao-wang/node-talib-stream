@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.StdKeeper = void 0;
 const sliding_window_arr_1 = require("sliding-window-arr");
 const common_1 = require("../utils/common");
 const smaKeeper_1 = require("./smaKeeper");
@@ -14,7 +15,7 @@ class StdKeeper {
         this.smaKeeper = new smaKeeper_1.SmaKeeper({ period: this.period });
     }
     static average(values) {
-        return common_1.sum(values) / values.length;
+        return (0, common_1.sum)(values) / values.length;
     }
     static standardDeviation(values, limit = 1000) {
         if (values.length === 0)

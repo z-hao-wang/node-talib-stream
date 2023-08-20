@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.CandleKeeper = void 0;
 class CandleKeeper {
     constructor(options) {
         this.max = 0;
@@ -168,14 +169,16 @@ class CandleKeeper {
                 sell_cost: 0,
                 buy_volume: 0,
                 sell_volume: 0,
-                avg: 0
+                avg: 0,
             };
         }
         else {
             const candle = Object.assign({}, this.lastCandle);
             const len = this.lastCandle.buy_times + this.lastCandle.sell_times;
             if (this.includesVolume && len) {
-                candle.avg = (this.lastCandle.buy_cost + this.lastCandle.sell_cost) / (this.lastCandle.buy_volume + this.lastCandle.sell_volume);
+                candle.avg =
+                    (this.lastCandle.buy_cost + this.lastCandle.sell_cost) /
+                        (this.lastCandle.buy_volume + this.lastCandle.sell_volume);
                 candle.len = len;
             }
             return candle;

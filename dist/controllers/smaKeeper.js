@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SmaKeeper = void 0;
 const sliding_window_arr_1 = require("sliding-window-arr");
 const common_1 = require("../utils/common");
 class SmaKeeper {
@@ -23,7 +24,7 @@ class SmaKeeper {
             else {
                 // the length hasn't reached max, we can just add to new sma
                 this.historyValues.push(val);
-                this.currentSma = common_1.sum(this.historyValues.toUnorderedArr()) / this.historyValues.length();
+                this.currentSma = (0, common_1.sum)(this.historyValues.toUnorderedArr()) / this.historyValues.length();
             }
         }
         return this.currentSma;

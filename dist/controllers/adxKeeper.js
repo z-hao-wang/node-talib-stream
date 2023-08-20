@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.AdxKeeper = void 0;
 const atrKeeper_1 = require("./atrKeeper");
 const assert = require("assert");
 // reference: https://sourceforge.net/p/ta-lib/code/HEAD/tree/trunk/ta-lib/c/src/ta_func/ta_ADX.c
@@ -35,12 +36,12 @@ class AdxKeeper {
             }
         };
         const calcTr = () => {
-            const thisTr = atrKeeper_1.getTr(candle.high, candle.low, this.lastCandle.close);
+            const thisTr = (0, atrKeeper_1.getTr)(candle.high, candle.low, this.lastCandle.close);
             this.prevTR = this.prevTR - this.prevTR / this.period + thisTr;
         };
         if (this.dataLen <= this.period) {
             addDiff();
-            this.prevTR += atrKeeper_1.getTr(candle.high, candle.low, this.lastCandle.close);
+            this.prevTR += (0, atrKeeper_1.getTr)(candle.high, candle.low, this.lastCandle.close);
         }
         else if (this.dataLen <= this.period * 2) {
             /* Add up all the initial DX. */

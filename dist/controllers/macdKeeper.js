@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.MacdKeeper = void 0;
 const emaKeeper_1 = require("./emaKeeper");
 class MacdKeeper {
     constructor(options) {

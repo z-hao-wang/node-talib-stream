@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.MaxMinKeeper = void 0;
 const sliding_window_arr_1 = require("sliding-window-arr");
 const Deque = require('collections/deque');
 // algorithm source https://www.nayuki.io/page/sliding-window-minimum-maximum-algorithm

@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.EmaKeeper = exports.getEma = void 0;
 const common_1 = require("../utils/common");
 function getEma(periods, price, prevEMA = price) {
     const k = 2 / (periods + 1);
@@ -21,7 +22,7 @@ class EmaKeeper {
         }
         else if (this.dataLen === this.period) {
             this.historyValues.push(price);
-            this.ema = common_1.sum(this.historyValues) / this.historyValues.length;
+            this.ema = (0, common_1.sum)(this.historyValues) / this.historyValues.length;
         }
         else {
             this.ema = getEma(this.period, price, this.ema);

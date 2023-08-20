@@ -1,5 +1,5 @@
 import { SlidingWindowArr } from 'sliding-window-arr';
-import * as _ from 'lodash';
+import { sum } from 'qs-js-utils';
 // http://cns.bu.edu/~gsc/CN710/fincast/Technical%20_indicators/Relative%20Strength%20Index%20(RSI).htm
 
 export class RsiKeeper {
@@ -36,8 +36,8 @@ export class RsiKeeper {
       this.prevGain.push(gain);
       this.prevLoss.push(loss);
       // save this to be used later
-      this.prevAvgGain = _.sum(this.prevGain.toUnorderedArr()) / this.prevGain.length();
-      this.prevAvgLoss = _.sum(this.prevLoss.toUnorderedArr()) / this.prevLoss.length();
+      this.prevAvgGain = sum(this.prevGain.toUnorderedArr()) / this.prevGain.length();
+      this.prevAvgLoss = sum(this.prevLoss.toUnorderedArr()) / this.prevLoss.length();
       /* Often documentation present the RSI calculation as follow:
        *    RSI = 100 - (100 / 1 + (prevGain/prevLoss))
        *

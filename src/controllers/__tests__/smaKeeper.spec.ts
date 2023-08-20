@@ -1,5 +1,5 @@
+import test from 'ava';
 import { SmaKeeper } from '../smaKeeper';
-import * as _ from 'lodash';
 const talib = require('talib');
 
 import { sampleCandles } from './sampleCandles';
@@ -15,30 +15,28 @@ export const MATypes = {
   T3: 8,
 };
 
-describe('emaKeeper', () => {
-  it('should match talib', () => {
-    const period = 3;
-    const close = _.map(sampleCandles, c => c.last);
+test('emaKeeper should match talib', t => {
+  const period = 3;
+  const close = sampleCandles.map(c => c.last);
 
-    const emaKeeperRes: number[] = [];
-    const emaKeeper = new SmaKeeper({ period: period });
-    _.each(close, c => {
-      emaKeeper.add(c);
-      emaKeeperRes.push(emaKeeper.get());
-    });
+  const emaKeeperRes: number[] = [];
+  const emaKeeper = new SmaKeeper({ period: period });
+  close.forEach(c => {
+    emaKeeper.add(c);
+    emaKeeperRes.push(emaKeeper.get());
+  });
 
-    // compare talib result
-    const talibRes = talib.execute({
-      name: 'MA',
-      optInMAType: MATypes.SMA,
-      startIdx: 0,
-      endIdx: close.length - 1,
-      inReal: close,
-      optInTimePeriod: period,
-    });
+  // compare talib result
+  const talibRes = talib.execute({
+    name: 'MA',
+    optInMAType: MATypes.SMA,
+    startIdx: 0,
+    endIdx: close.length - 1,
+    inReal: close,
+    optInTimePeriod: period,
+  });
 
-    _.each(talibRes.result.outReal, (t, i: number) => {
-      expect(Math.abs(t - emaKeeperRes[i + period - 1]) < 0.00001).toBeTruthy();
-    });
+  talibRes.result.outReal.forEach((r: any, i: number) => {
+    t.deepEqual(Math.abs(r - emaKeeperRes[i + period - 1]) < 0.00001, true);
   });
 });
