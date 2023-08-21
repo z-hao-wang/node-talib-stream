@@ -1,6 +1,6 @@
 import { MaxMinKeeper } from './maxMinKeeper';
 import { HLC } from '../types/sharedTypes';
-import { SmaKeeper } from "./smaKeeper";
+import { SmaKeeper } from './smaKeeper';
 export declare namespace KdjKeeper {
     interface Options {
         periodFastK: number;
