@@ -15,7 +15,7 @@ export const MATypes = {
   T3: 8,
 };
 
-test('emaKeeper should match talib', t => {
+test('smaKeeper should match talib', t => {
   const period = 3;
   const close = sampleCandles.map(c => c.last);
 
@@ -36,7 +36,7 @@ test('emaKeeper should match talib', t => {
     optInTimePeriod: period,
   });
 
-  talibRes.result.outReal.forEach((r: any, i: number) => {
+  talibRes.result.outReal.forEach((r:number, i: number) => {
     t.deepEqual(Math.abs(r - emaKeeperRes[i + period - 1]) < 0.00001, true);
   });
 });

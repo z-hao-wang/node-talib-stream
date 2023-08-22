@@ -33,7 +33,7 @@ test('adxKeeper should match talib', t => {
       low,
       optInTimePeriod: period,
     });
-    talibRes.result.outReal.forEach( (t:any, i: number) => {
-      t.truthy(Math.abs(t - adxKeeperRes[i + period * 2 - 1]) < 0.00001);
+    talibRes.result.outReal.forEach( (value:any, i: number) => {
+      t.truthy(Math.abs( value- adxKeeperRes[i + period * 2 - 1]) < 0.00001);
     });
 });
