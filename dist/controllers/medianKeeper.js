@@ -12,7 +12,7 @@ class MedianKeeper {
     }
     add(value) {
         let success = true;
-        if (this.valuesArr.length() == this.maxLen) {
+        if (this.valuesArr.length() === this.maxLen) {
             // need to remove the old value first.
             const firstVal = this.valuesArr.first();
             let deleted = false;

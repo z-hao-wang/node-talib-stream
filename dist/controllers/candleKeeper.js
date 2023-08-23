@@ -58,18 +58,25 @@ class CandleKeeper {
         this.lastCandle.buy_times = 0;
         this.lastCandle.sell_times = 0;
     }
+    createCandle(candle) {
+        if (this.exchange) {
+            candle.exchange = this.exchange;
+        }
+        if (this.symbol) {
+            candle.pairDb = this.symbol;
+        }
+        return candle;
+    }
     add(ts, price, side = 0, amount = 0) {
         const shiftMs = this.shiftMs;
         if (!this.lastCandle) {
-            this.lastCandle = {
-                exchange: this.exchange,
-                pairDb: this.symbol,
+            this.lastCandle = this.createCandle({
                 ts: CandleKeeper.snapTimestamp(ts, this.period, shiftMs),
                 max: price,
                 min: price,
                 first: price,
                 last: price,
-            };
+            });
             if (this.includesVolume) {
                 this.lastCandle.buy_volume = this.buy_volume;
                 this.lastCandle.sell_volume = this.sell_volume;
@@ -85,15 +92,13 @@ class CandleKeeper {
                 let currentTmpCandleTs = this.lastCandle.ts + this.period * 1000;
                 while (currentTmpCandleTs < ts - this.period * 1000) {
                     const lastCandlePrice = this.last;
-                    this.lastCandle = {
-                        exchange: this.exchange,
-                        pairDb: this.symbol,
+                    this.lastCandle = this.createCandle({
                         ts: CandleKeeper.snapTimestamp(currentTmpCandleTs, this.period, shiftMs),
                         max: lastCandlePrice,
                         min: lastCandlePrice,
                         first: lastCandlePrice,
                         last: lastCandlePrice,
-                    };
+                    });
                     if (this.includesVolume) {
                         this.resetCandle();
                     }
@@ -106,15 +111,13 @@ class CandleKeeper {
                 }
             }
             // generate new candle
-            this.lastCandle = {
-                exchange: this.exchange,
-                pairDb: this.symbol,
+            this.lastCandle = this.createCandle({
                 ts: CandleKeeper.snapTimestamp(ts, this.period, shiftMs),
                 max: this.max,
                 min: this.min,
                 first: this.first,
                 last: this.last,
-            };
+            });
             if (this.includesVolume) {
                 this.lastCandle.buy_volume = this.buy_volume;
                 this.lastCandle.sell_volume = this.sell_volume;
@@ -154,9 +157,7 @@ class CandleKeeper {
     get() {
         if (!this.lastCandle) {
             console.error(`CandleKeeper no last candle ${this.exchange} ${this.symbol}`);
-            return {
-                exchange: this.exchange,
-                pairDb: this.symbol,
+            return this.createCandle({
                 ts: 0,
                 max: 0,
                 min: 0,
@@ -170,7 +171,7 @@ class CandleKeeper {
                 buy_volume: 0,
                 sell_volume: 0,
                 avg: 0,
-            };
+            });
         }
         else {
             const candle = Object.assign({}, this.lastCandle);
@@ -186,15 +187,13 @@ class CandleKeeper {
     }
     getTempCandle(ts) {
         const shiftMs = this.shiftMs;
-        const tmpCandle = {
-            exchange: this.exchange,
-            pairDb: this.symbol,
+        const tmpCandle = this.createCandle({
             ts: CandleKeeper.snapTimestamp(ts, this.period, shiftMs),
             max: this.max,
             min: this.min,
             first: this.first,
             last: this.last,
-        };
+        });
         if (this.includesVolume) {
             tmpCandle.buy_volume = this.buy_volume;
             tmpCandle.sell_volume = this.sell_volume;

@@ -8,7 +8,7 @@
     "build": "rimraf dist && tsc && rimraf ./dist/controllers/__tests__",
     "tsc": "tsc",
     "tsc:watch": "tsc -w",
-    "prettier": "node ./node_modules/prettier/bin-prettier.js --parser=typescript --single-quote --trailing-comma=all --write --print-width=120 'src/**/*.ts'",
+    "prettier": "node ./node_modules/prettier/bin-prettier.js --parser=typescript --single-quote --trailing-comma=all --write --print-width=120 \"src/**/*.ts\"",
     "test": "ava"
   },
   "ava": {
