@@ -36,7 +36,7 @@ test('smaKeeper should match talib', t => {
     optInTimePeriod: period,
   });
 
-  talibRes.result.outReal.forEach((r:number, i: number) => {
+  talibRes.result.outReal.forEach((r: number, i: number) => {
     t.deepEqual(Math.abs(r - emaKeeperRes[i + period - 1]) < 0.00001, true);
   });
 });

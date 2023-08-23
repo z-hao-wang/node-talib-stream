@@ -49,6 +49,7 @@ export declare class CandleKeeper {
     static snapTimestamp(ts: number, resolution: number, shiftMs?: number): number;
     addTrade(tradeV2: number[]): void;
     resetCandle(): void;
+    createCandle(candle: CandleKeeper.Candle): CandleKeeper.Candle;
     add(ts: number, price: number, side?: number, amount?: number): void;
     get(): CandleKeeper.Candle;
     getTempCandle(ts: number): CandleKeeper.Candle;
