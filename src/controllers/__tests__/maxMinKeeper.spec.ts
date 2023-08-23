@@ -1,23 +1,23 @@
-// import { MaxMinKeeper } from '../maxMinKeeper';
-// describe('MaxMinKeeper', () => {
-//   it('should work', () => {
-//     const m = new MaxMinKeeper({ period: 3 });
-//     m.add(10);
-//     expect(m.getMax()).toBe(10);
-//     expect(m.getMin()).toBe(10);
-//     m.add(11);
-//     expect(m.getMax()).toBe(11);
-//     expect(m.getMin()).toBe(10);
-//     m.add(9);
-//     expect(m.getMax()).toBe(11);
-//     expect(m.getMin()).toBe(9);
-//
-//     m.add(5);
-//     m.add(4);
-//     expect(m.getMax()).toBe(9);
-//     expect(m.getMin()).toBe(4);
-//     m.add(3);
-//     expect(m.getMax()).toBe(5);
-//     expect(m.getMin()).toBe(3);
-//   });
-// });
+import { MaxMinKeeper } from '../maxMinKeeper';
+import test from 'ava';
+//check the max&min is specific value of not
+test('MaxMinKeeper should work', (t) => {
+    const m = new MaxMinKeeper({ period: 3 });
+    m.add(10);
+    t.truthy(m.getMax()===10);
+    t.truthy(m.getMin()===10);
+    m.add(11);
+    t.truthy(m.getMax()===11);
+    t.truthy(m.getMin()===10);
+    m.add(9);
+    t.truthy(m.getMax()===11);
+    t.truthy(m.getMin()===9);
+
+    m.add(5);
+    m.add(4);
+    t.truthy(m.getMax()===9);
+    t.truthy(m.getMin()===4);
+    m.add(3);
+    t.truthy(m.getMax()===5);
+    t.truthy(m.getMin()===3);
+});
