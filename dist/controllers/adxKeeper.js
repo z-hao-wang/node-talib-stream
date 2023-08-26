@@ -1,8 +1,11 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AdxKeeper = void 0;
 const atrKeeper_1 = require("./atrKeeper");
-const assert = require("assert");
+const assert_1 = __importDefault(require("assert"));
 // reference: https://sourceforge.net/p/ta-lib/code/HEAD/tree/trunk/ta-lib/c/src/ta_func/ta_ADX.c
 class AdxKeeper {
     constructor(options) {
@@ -15,7 +18,7 @@ class AdxKeeper {
         this.lastCandle = null;
         this.sumDX = 0;
         this.period = options.period;
-        assert(this.period >= 2, 'AdxKeeper period must be >= 2');
+        (0, assert_1.default)(this.period >= 2, 'AdxKeeper period must be >= 2');
     }
     add(candle) {
         this.dataLen++;

@@ -15,28 +15,28 @@ export const MATypes = {
   MAMA: 7,
   T3: 8,
 };
-test('emaKeeper should match talib',(t) => {
-    const period = 3;
-    const close = sampleCandles.map( (c) => c.last);
+test('emaKeeper should match talib', t => {
+  const period = 3;
+  const close = sampleCandles.map(c => c.last);
 
-    const emaKeeperRes: number[] = [];
-    const emaKeeper = new EmaKeeper({ period: period });
-    close.forEach((c) => {
-      emaKeeper.add(c);
-      emaKeeperRes.push(emaKeeper.get());
-    });
+  const emaKeeperRes: number[] = [];
+  const emaKeeper = new EmaKeeper({ period: period });
+  close.forEach(c => {
+    emaKeeper.add(c);
+    emaKeeperRes.push(emaKeeper.get());
+  });
 
-    // compare talib result
-    const talibRes = talib.execute({
-      name: 'MA',
-      optInMAType: MATypes.EMA,
-      startIdx: 0,
-      endIdx: close.length - 1,
-      inReal: close,
-      optInTimePeriod: period,
-    });
+  // compare talib result
+  const talibRes = talib.execute({
+    name: 'MA',
+    optInMAType: MATypes.EMA,
+    startIdx: 0,
+    endIdx: close.length - 1,
+    inReal: close,
+    optInTimePeriod: period,
+  });
 
-    talibRes.result.outReal.forEach( (value:any, i: number) => {
-      t.truthy(Math.abs(value - emaKeeperRes[i + period - 1]) < 0.00001);
-    });
+  talibRes.result.outReal.forEach((value: any, i: number) => {
+    t.truthy(Math.abs(value - emaKeeperRes[i + period - 1]) < 0.00001);
+  });
 });

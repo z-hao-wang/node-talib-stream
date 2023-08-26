@@ -1,6 +1,6 @@
 import { SlidingWindowArr } from 'sliding-window-arr';
 import { sum } from '../utils/common';
-import * as assert from 'assert';
+import assert from 'assert';
 import { HLC } from '../types/sharedTypes';
 
 export function getTr(high: number, low: number, prevClose: number) {

@@ -1,5 +1,5 @@
 import { getTr } from './atrKeeper';
-import * as assert from 'assert';
+import assert from 'assert';
 import { HLC } from '../types/sharedTypes';
 // reference: https://sourceforge.net/p/ta-lib/code/HEAD/tree/trunk/ta-lib/c/src/ta_func/ta_ADX.c
 
