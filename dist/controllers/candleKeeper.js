@@ -15,19 +15,22 @@ class CandleKeeper {
         this.sell_times = 0;
         this.shiftMs = 0;
         this.len = 0;
+        this.onNewCandleCallbacks = [];
         this.includesVolume = false;
         this.period = options.period;
         if (options.shiftMs && options.shiftMs > 0) {
             throw new Error(`shiftMs must be < 0`);
         }
         this.shiftMs = options.shiftMs || 0;
-        this.onNewCandle = options.onNewCandle;
+        if (options.onNewCandle) {
+            this.onNewCandleCallbacks.push(options.onNewCandle);
+        }
         this.includesVolume = options.includesVolume || false;
         this.exchange = options.exchange;
         this.symbol = options.symbol;
     }
     setOnNewCandle(onNewCandle) {
-        this.onNewCandle = onNewCandle;
+        this.onNewCandleCallbacks.push(onNewCandle);
     }
     // snap timestamp to resolution.
     // e.g. 10:01:00 should snap tp 10:00:00 for 14400 resolution
@@ -101,7 +104,7 @@ class CandleKeeper {
                     this.min = lastCandlePrice;
                     this.first = lastCandlePrice;
                     this.last = lastCandlePrice;
-                    this.onNewCandle && this.onNewCandle(this.get());
+                    this.runNewCandles();
                     currentTmpCandleTs += this.period * 1000;
                 }
             }
@@ -123,7 +126,7 @@ class CandleKeeper {
                 this.lastCandle.buy_times = this.buy_times;
                 this.lastCandle.sell_times = this.sell_times;
             }
-            this.onNewCandle && this.onNewCandle(this.get());
+            this.runNewCandles();
             this.first = 0;
         }
         // new candle, reset all data
@@ -202,6 +205,11 @@ class CandleKeeper {
             tmpCandle.sell_cost = this.sell_cost;
         }
         return tmpCandle;
+    }
+    runNewCandles() {
+        for (let onNewCandle of this.onNewCandleCallbacks) {
+            onNewCandle(this.get());
+        }
     }
     getPeriod() {
         return this.period;

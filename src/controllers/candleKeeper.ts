@@ -41,7 +41,7 @@ export class CandleKeeper {
   private shiftMs = 0;
   private len = 0;
   private lastCandle?: CandleKeeper.Candle;
-  private onNewCandle?: (candle: CandleKeeper.Candle) => any;
+  private onNewCandleCallbacks: ((candle: CandleKeeper.Candle) => any)[] = [];
   private includesVolume = false;
 
   exchange?: string;
@@ -53,15 +53,17 @@ export class CandleKeeper {
       throw new Error(`shiftMs must be < 0`);
     }
     this.shiftMs = options.shiftMs || 0;
-    this.onNewCandle = options.onNewCandle;
+    if (options.onNewCandle) {
+      this.onNewCandleCallbacks.push(options.onNewCandle);
+    }
     this.includesVolume = options.includesVolume || false;
 
     this.exchange = options.exchange;
     this.symbol = options.symbol;
   }
 
-  setOnNewCandle(onNewCandle: CandleKeeper.Options['onNewCandle']) {
-    this.onNewCandle = onNewCandle;
+  setOnNewCandle(onNewCandle: (candle: CandleKeeper.Candle) => any) {
+    this.onNewCandleCallbacks.push(onNewCandle);
   }
 
   // snap timestamp to resolution.
@@ -136,7 +138,7 @@ export class CandleKeeper {
           this.min = lastCandlePrice;
           this.first = lastCandlePrice;
           this.last = lastCandlePrice;
-          this.onNewCandle && this.onNewCandle(this.get());
+          this.runNewCandles();
           currentTmpCandleTs += this.period * 1000;
         }
       }
@@ -158,7 +160,7 @@ export class CandleKeeper {
         this.lastCandle.buy_times = this.buy_times;
         this.lastCandle.sell_times = this.sell_times;
       }
-      this.onNewCandle && this.onNewCandle(this.get());
+      this.runNewCandles();
       this.first = 0;
     }
     // new candle, reset all data
@@ -241,6 +243,12 @@ export class CandleKeeper {
       tmpCandle.sell_cost = this.sell_cost;
     }
     return tmpCandle;
+  }
+
+  protected runNewCandles() {
+    for (let onNewCandle of this.onNewCandleCallbacks) {
+      onNewCandle(this.get());
+    }
   }
 
   getPeriod() {

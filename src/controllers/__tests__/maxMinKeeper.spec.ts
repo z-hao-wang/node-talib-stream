@@ -21,3 +21,14 @@ test('MaxMinKeeper should work', t => {
   t.truthy(m.getMax() === 5);
   t.truthy(m.getMin() === 3);
 });
+
+test('MaxMinKeeper speed', t => {
+  const m = new MaxMinKeeper({ period: 300 });
+  const startTs = Date.now();
+  for (let i = 0; i < 1000000; i++) {
+    m.add(Math.random());
+  }
+  console.log(`time cost = ${Date.now() - startTs}`);
+
+  t.pass();
+});

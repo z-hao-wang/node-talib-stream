@@ -40,17 +40,18 @@ export declare class CandleKeeper {
     private shiftMs;
     private len;
     private lastCandle?;
-    private onNewCandle?;
+    private onNewCandleCallbacks;
     private includesVolume;
     exchange?: string;
     symbol?: string;
     constructor(options: CandleKeeper.Options);
-    setOnNewCandle(onNewCandle: CandleKeeper.Options['onNewCandle']): void;
+    setOnNewCandle(onNewCandle: (candle: CandleKeeper.Candle) => any): void;
     static snapTimestamp(ts: number, resolution: number, shiftMs?: number): number;
     addTrade(tradeV2: number[]): void;
     resetCandle(): void;
     add(ts: number, price: number, side?: number, amount?: number): void;
     get(): CandleKeeper.Candle;
     getTempCandle(ts: number): CandleKeeper.Candle;
+    protected runNewCandles(): void;
     getPeriod(): number;
 }
