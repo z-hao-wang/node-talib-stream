@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@ava/typescript@^4.1.0":
+"@ava/typescript@4.1.0":
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/@ava/typescript/-/typescript-4.1.0.tgz#0dde7b3bbcfe59c1424fb20eb289b4a2b3694418"
   integrity sha512-1iWZQ/nr9iflhLK9VN8H+1oDZqe93qxNnyYUz+jTzkYPAHc5fdZXBrqmNIgIfFhWYXK5OaQ5YtC7OmLeTNhVEg==
@@ -76,10 +76,10 @@
   resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.4.tgz#0b92dcc0cc1c81f6f306a381f28e31b1a56536e9"
   integrity sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==
 
-"@types/node@^11.13.4":
-  version "11.15.54"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-11.15.54.tgz#59ed60e7b0d56905a654292e8d73275034eb6283"
-  integrity sha512-1RWYiq+5UfozGsU6MwJyFX6BtktcT10XRjvcAQmskCtMcW3tPske88lM/nHv7BQG1w9KBXI1zPGuu5PnNCX14g==
+"@types/node@11.13.4":
+  version "11.13.4"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-11.13.4.tgz#f83ec3c3e05b174b7241fadeb6688267fe5b22ca"
+  integrity sha512-+rabAZZ3Yn7tF/XPGHupKIL5EcAbrLxnTr/hgQICxbeuAfWtT0UZSfULE+ndusckBItcv4o6ZeOJplQikVcLvQ==
 
 acorn-walk@^8.1.1, acorn-walk@^8.2.0:
   version "8.2.0"
@@ -156,7 +156,7 @@ arrify@^3.0.0:
   resolved "https://registry.yarnpkg.com/arrify/-/arrify-3.0.0.tgz#ccdefb8eaf2a1d2ab0da1ca2ce53118759fd46bc"
   integrity sha512-tLkvA81vQG/XqE2mjDkGQHoOINtMHtysSnemrmoGe6PydDPMRbVugqyk4A6V/WDWEfm3l+0d8anA9r8cv/5Jaw==
 
-ava@^5.3.1:
+ava@5.3.1:
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/ava/-/ava-5.3.1.tgz#335737dd963b7941b90214836cea2e8de1f4d5f4"
   integrity sha512-Scv9a4gMOXB6+ni4toLuhAm9KYWEjsgBglJl+kMGI5+IVDt120CCDZyB5HNU9DjmLI2t4I0GbnxGLmmRfGTJGg==
@@ -323,10 +323,10 @@ code-excerpt@^4.0.0:
   dependencies:
     convert-to-spaces "^2.0.1"
 
-collections@^5.1.12:
-  version "5.1.13"
-  resolved "https://registry.yarnpkg.com/collections/-/collections-5.1.13.tgz#eee204a93b67473c8e74e00e934a997cc2817585"
-  integrity sha512-SCb6Qd+d3Z02corWQ7/mqXiXeeTdHvkP6TeFSYfGYdCFp1WrjSNZ3j6y8Y3T/7osGEe0iOcU2g1d346l99m4Lg==
+collections@5.1.12:
+  version "5.1.12"
+  resolved "https://registry.yarnpkg.com/collections/-/collections-5.1.12.tgz#270f6c26ddc2930734ae6cc19ad4e8fb412af739"
+  integrity sha512-7WV0gdGlQFHjB//+/5JW4CdMnOlf7fWMMeM3EWvuao7RbK0MeFS01bZOgWmIH5DHDejSutf455QUZ56ZjjROXw==
   dependencies:
     weak-map "~1.0.x"
 
@@ -916,10 +916,10 @@ plur@^5.1.0:
   dependencies:
     irregular-plurals "^3.3.0"
 
-prettier@^1.16.4:
-  version "1.19.1"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.19.1.tgz#f7d7f5ff8a9cd872a7be4ca142095956a60797cb"
-  integrity sha512-s7PoyDv/II1ObgQunCbB9PdLmUcBZcnWOcxDh7O0N/UwDEsHyqkW+Qh28jW+mVuCdx7gLB0BotYI1Y6uI9iyew==
+prettier@1.16.4:
+  version "1.16.4"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.16.4.tgz#73e37e73e018ad2db9c76742e2647e21790c9717"
+  integrity sha512-ZzWuos7TI5CKUeQAtFd6Zhm2s6EpAD/ZLApIhsF9pRvRtM1RFo61dM/4MSRUA0SuLugA/zgrZD8m0BaY46Og7g==
 
 pretty-ms@^8.0.0:
   version "8.0.0"
@@ -928,10 +928,10 @@ pretty-ms@^8.0.0:
   dependencies:
     parse-ms "^3.0.0"
 
-qs-js-utils@^0.0.36:
-  version "0.0.36"
-  resolved "https://registry.yarnpkg.com/qs-js-utils/-/qs-js-utils-0.0.36.tgz#030811a9391656e364c807a38fdbc45c617b6fcf"
-  integrity sha512-MmSCUc0msw2t86p1y7HCZHXjNuJTgSUcE7VpYGL5pV5okVy0WhmdvdugcUHUafBqcUwQ0J32RKE8GjQMl5UUTg==
+qs-js-utils@0.0.42:
+  version "0.0.42"
+  resolved "https://registry.yarnpkg.com/qs-js-utils/-/qs-js-utils-0.0.42.tgz#d4e436a699022aabed5c9e2b61659c7a5bd50f38"
+  integrity sha512-P0JZ8EN0XMhJogze/XVbP30NEsrg51+rVNLs6eF5RBchmXGQmB0wMD5aDe/YqVZdKn6BHx3K8EULVr56qi3pZg==
   dependencies:
     byline "^5.0.0"
 
@@ -969,10 +969,10 @@ reusify@^1.0.4:
   resolved "https://registry.yarnpkg.com/reusify/-/reusify-1.0.4.tgz#90da382b1e126efc02146e90845a88db12925d76"
   integrity sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==
 
-rimraf@^2.6.3:
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.7.1.tgz#35797f13a7fdadc566142c29d4f07ccad483e3ec"
-  integrity sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==
+rimraf@2.6.3:
+  version "2.6.3"
+  resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.6.3.tgz#b2d104fe0d8fb27cf9e0a1cda8262dd3833c6cab"
+  integrity sha512-mwqeW5XsA2qAejG46gYdENaxXjx9onRNCfn7L0duuP4hCuTIi/QO7PDK07KJfp1d+izWPrzEJDcSqBa0OZQriA==
   dependencies:
     glob "^7.1.3"
 
@@ -1032,10 +1032,10 @@ slice-ansi@^5.0.0:
     ansi-styles "^6.0.0"
     is-fullwidth-code-point "^4.0.0"
 
-sliding-window-arr@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/sliding-window-arr/-/sliding-window-arr-0.1.2.tgz#2b281fcb02cadf7acb2ea0f11620b9c4ab2b710a"
-  integrity sha512-PEJkSGAPu5O5oh2x8+6OB1O7CEYweJHWbS2ETGLJY96GYnZiLp9hNK1hRYnw9gH02xXLzQpGJ8hkHSv8inQQEw==
+sliding-window-arr@0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/sliding-window-arr/-/sliding-window-arr-0.1.3.tgz#a3c0766b18ec00b5535943fb4cfbd87df65a7e43"
+  integrity sha512-dmILWu2SYVlZ2s90ze7Z5YKPqZ+ZeaiApsqQvDUzCq8GiiReZXoDOCRuRHdPwsGoneYexx9VilewSEo74NTmaA==
 
 sprintf-js@~1.0.2:
   version "1.0.3"
@@ -1096,7 +1096,7 @@ supertap@^3.0.1:
     serialize-error "^7.0.1"
     strip-ansi "^7.0.1"
 
-talib@^1.1.3:
+talib@1.1.5:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/talib/-/talib-1.1.5.tgz#b0922dbb3108cd74e6bd72f2b7b5ac9912a35d84"
   integrity sha512-at8OQzwnAt5h/6d28/rL6xEO6d7/WzkKNd7NUtNVNewFGPwazAeglXo/sqTNLBZ0zUtZ8w4sXwpapKzH3eIX6A==
@@ -1120,7 +1120,7 @@ to-regex-range@^5.0.1:
   dependencies:
     is-number "^7.0.0"
 
-ts-node@^10.9.1:
+ts-node@10.9.1:
   version "10.9.1"
   resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-10.9.1.tgz#e73de9102958af9e1f0b168a6ff320e25adcff4b"
   integrity sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==
